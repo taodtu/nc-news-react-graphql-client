@@ -1,7 +1,15 @@
 import React from 'react';
 
-const User = ({ user }) =>
- <div >
+const User = ({ user, errors }) => {
+ if (errors) {
+  return (
+   <p>
+    <strong>Something went wrong:</strong>
+    {errors.map(error => error.message).join(' ')}
+   </p>
+  );
+ };
+ return (<div >
   <div className="user">
    <span style={{ width: '20%' }}>Username </span>
    <span style={{ width: '20%' }}>Name </span>
@@ -17,5 +25,6 @@ const User = ({ user }) =>
    <span style={{ width: '20%' }}>{user.comment_count} </span>
   </div>)
    : null}
- </div>
+ </div>)
+}
 export default User;
