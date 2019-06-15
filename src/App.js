@@ -15,8 +15,16 @@ const GET_TOPICS = `
     article_count
     comment_count
   }
-}
-`;
+}`;
+const GET_USER = username => `
+query{ getUser(username:"${username}"){
+  username
+  name
+  avatar_url
+  article_count
+  comment_count
+}  
+}`;
 class App extends Component {
   state = {
     topics: '',
@@ -35,10 +43,22 @@ class App extends Component {
         })
       })
   }
+  fetchUser = username => {
+    const query = GET_USER(username)
+    axiosNcGraphQL
+      .post('', { query })
+      .then(result => {
+        this.setState({
+          user: result.data.data.getUser,
+          errors: result.data.errors
+        })
+      })
+  }
   onChange = (event) => {
     this.setState({ user: event.target.value })
   }
   onSubmit = (event) => {
+    this.fetchUser(this.state.user)
     event.preventDefault();
   }
 
@@ -57,7 +77,7 @@ class App extends Component {
             <input type="text"
               placeholder="username"
               name="user"
-              value={user}
+              value={user.username}
               onChange={this.onChange}
             />
             <button type="submit" >Search</button>

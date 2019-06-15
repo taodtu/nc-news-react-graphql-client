@@ -10,7 +10,10 @@
   display:flex;
   margin-left: 30px;
 }
-
+.icon{
+  width:30px;
+  height:30px
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
