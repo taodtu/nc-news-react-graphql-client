@@ -40,7 +40,7 @@ class App extends Component {
     this.setState({ user: event.target.value })
   }
   onSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
   }
 
   render() {
