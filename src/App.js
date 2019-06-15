@@ -29,7 +29,6 @@ class App extends Component {
     axiosNcGraphQL
       .post('', { query: GET_TOPICS })
       .then(result => {
-        console.log(result.data.data.topics)
         this.setState({
           topics: result.data.data.topics,
           errors: result.data.errors
@@ -44,13 +43,13 @@ class App extends Component {
   }
 
   render() {
-    const { user, topics } = this.state
+    const { user, topics, errors } = this.state
     return (
       <div className="App">
         <h1>Nc-news</h1>
         <div>
           {topics
-            ? (<Topic topics={topics} />)
+            ? (<Topic topics={topics} errors={errors} />)
             : (<p>No information yet ...</p>)}
         </div>
         <div>
